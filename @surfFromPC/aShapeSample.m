@@ -22,10 +22,9 @@ for regionID = 1:ashape.numRegions
 	
 	F = OBJ.eval(nodes);
 	
-	[newfaces, newvertices] = ...
-		marchingTetra( nodes, elements, F );
+	Snew = OBJ.marchingTetra( nodes, elements, F );
 	
-	S.faces = [S.faces; newfaces + size(S.vertices,1)];
-	S.vertices = [S.vertices; newvertices];
+	S.faces = [S.faces; Snew.faces + size(S.vertices,1)];
+	S.vertices = [S.vertices; Snew.vertices];
 	
 end
