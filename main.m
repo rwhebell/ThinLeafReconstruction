@@ -1,6 +1,6 @@
 %% Cleanup & load data
 
-clear
+% clear
 close all
 
 load plantLeaf allPoints
@@ -13,7 +13,7 @@ denoiseThresh = 1.0; % in scan units
 
 % Downsampling
 method = 'gridaverage'; % choose gridaverage or random
-downsampleParam = 3.0;
+downsampleParam = 1.5;
 % for gridaverage: in the units of the scan (e.g., mm)
 % for random: proportion between 0 and 1
 
@@ -80,7 +80,7 @@ S_tet = aShapeSample(OBJ, alpha, Hmax);
 saveid = fix(clock);
 saveid = sprintf('%d_%02d_%02d_%02d%02d/',saveid(1:5));
 
-savepath = saveid;
+savepath = ['saves/', saveid];
 mkdir(savepath)
 
 save([savepath,'workspace.mat'])
@@ -120,7 +120,6 @@ if length(rho)>1
 	ylabel('log_{10}(rho)')
 	
 	savefig(fig,[savepath,'condAndRho_vs_Ni'])
-	close(fig)
 end
 
 %% Figure: Condition number vs smoothing parm
@@ -136,5 +135,4 @@ if length(rho)>1
 	cb.Label.String = 'number in subdomain, N(i)';
 	
 	savefig(fig,[savepath,'cond_vs_rho'])
-	close(fig)
 end
