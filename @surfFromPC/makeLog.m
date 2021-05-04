@@ -5,12 +5,12 @@ fileID = fopen(filename,'w');
 
 fprintf(fileID,"Options log for rbfpum surface\r\n\r\n");
 
-if ~isempty(obj.denoiseOpts)
+if ~isempty(fieldnames(obj.denoiseOpts))
 	fprintf(fileID,"denoise nbrs = %d\r\n", obj.denoiseOpts.NumNeighbors);
 	fprintf(fileID,"denoise thresh = %g\r\n", obj.denoiseOpts.Threshold);
 end
 
-if ~isempty(obj.downsampleOpts)
+if ~isempty(fieldnames(obj.downsampleOpts))
 	fprintf(fileID,"downsample method = %s\r\n", obj.downsampleOpts.method);
 	fprintf(fileID,"downsample param = %g\r\n", obj.downsampleOpts.param);
 	fprintf(fileID,"\r\n");
