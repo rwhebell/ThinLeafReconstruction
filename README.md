@@ -19,3 +19,7 @@ The main parameters of interest and their effects are:
 - Sampling resolution: `Ngrid` for marching cubes, or `Hmax` for marching tetrahedra. 
     - A higher value for `Ngrid` will result in a finer grid for marching cubes isosurfacing. 
     - A lower value for `Hmax` will result in a finer tetrahedral mesh for marching tetrahedra isosurfacing.
+
+## Included scripts
+- `sphereTest.m` will reconstruct one half of a sphere from 791 points, without denoising or downsampling. This should run in under a minute on a desktop computer.
+- `main.m` will reconstruct a plant leaf from a heavily downsampled point cloud with 5516 points. This should run in under 10 minutes on a desktop computer. You may like to reduce the `downsampleParam` (say, to 0.5) for a finer reconstruction.
