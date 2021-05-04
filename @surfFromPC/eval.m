@@ -7,7 +7,7 @@ rbf = obj.fitOpts.rbf;
 polydegree = obj.fitOpts.polydegree;
 
 [N,~] = size(x);
-F = zeros(N,1,'single');
+F = zeros(N, 1, 'like', x);
 wsum = zeros(N,1);
 
 if nargout>2
