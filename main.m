@@ -1,15 +1,19 @@
+%% Cleanup & load data
+
 clear
 close all
 
-load samplePoints pts
+load plantLeaf allPoints
+
+%% Parameters
 
 % Denoising
 denoiseNbrs = 50;
-denoiseThresh = 1.0;
+denoiseThresh = 1.0; % in scan units
 
 % Downsampling
 method = 'gridaverage'; % choose gridaverage or random
-downsampleParam = 3;
+downsampleParam = 3.0;
 % for gridaverage: in the units of the scan (e.g., mm)
 % for random: proportion between 0 and 1
 
@@ -17,12 +21,12 @@ downsampleParam = 3;
 pcaNbrs = 50;
 
 % Normal orientation
-coarsegrid = 3*downsampleParam; % in the units of the scan
+coarsegrid = 2*downsampleParam; % in the units of the scan
 graphNbrs = 10;
 
 % Off-surface points
 h = 1; % num off-surf points = 2 * numpts / h
-L = 2*downsampleParam; % height of off-surf pts
+L = downsampleParam; % height of off-surf pts
 
 % Octree subdivision
 Nmin = 2000;
@@ -32,14 +36,14 @@ expand = 1.1;
 % RBF interpolation
 rbf = @(r) r.^3;
 polydegree = 2;
-% rho = [1e-10,10]; % range for GCV
-rho = 1e-5; % constant
+rho = [1e-10,10]; % range for GCV
+% rho = 1e-5; % constant
 regFn = @(N,t) 96*pi*N*t;
 
 % Evaluation
-alpha = 2*L;
+alpha = 3*L;
 Ngrid = 100; % for marching cubes
-Hmax = L/4; % for tet mesh gen
+Hmax = L/2; % for tet mesh gen
 
 % Turn waitbars on/off
 global waitbarToggle
@@ -47,7 +51,7 @@ waitbarToggle = true;
 
 %%
 
-OBJ = surfFromPC(pointCloud(pts));
+OBJ = surfFromPC(allPoints);
 
 OBJ.denoise(denoiseNbrs, denoiseThresh);
 
@@ -65,10 +69,10 @@ condition = OBJ.fit(rbf, polydegree, rho, regFn);
 
 % For gridded sample & marching cubes:
 [X, Y, Z, INTERP] = OBJ.gridSample(Ngrid, alpha);
-S = isosurface(X,Y,Z,INTERP);
+S_cube = isosurface(X,Y,Z,INTERP);
 
 % For tetrahedral mesh of alphaShape & marching tetra:
-% S = aShapeSample(OBJ, alpha, Hmax);
+S_tet = aShapeSample(OBJ, alpha, Hmax);
 
 
 %% Save
@@ -85,13 +89,22 @@ OBJ.makeLog([savepath,'log.txt'])
 
 %% Figure: Surface
 
-fig = figure;
-patch(S, "LineStyle", "none", "FaceColor", "green")
-view(3)
+fig_cube = figure;
+patch(S_cube, "LineStyle", "none", "FaceColor", "green")
+campos([451.2731  725.7438   73.0985])
 axis equal vis3d
 camlight
 
-savefig(fig,[savepath,'surface'])
+savefig(fig_cube,[savepath,'surface_cube'])
+
+
+fig_tet = figure;
+patch(S_tet, "LineStyle", "none", "FaceColor", "green")
+campos([451.2731  725.7438   73.0985])
+axis equal vis3d
+camlight
+
+savefig(fig_tet,[savepath,'surface_tet'])
 
 %% Figure: Cond number and smoothing parameter vs num points in patch
 
