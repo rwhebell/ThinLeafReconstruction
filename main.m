@@ -94,6 +94,7 @@ patch(S_cube, "LineStyle", "none", "FaceColor", "green")
 campos([451.2731  725.7438   73.0985])
 axis equal vis3d
 camlight
+title("Triangulation of the implicit surface by marching cubes")
 
 savefig(fig_cube,[savepath,'surface_cube'])
 
@@ -103,6 +104,7 @@ patch(S_tet, "LineStyle", "none", "FaceColor", "green")
 campos([451.2731  725.7438   73.0985])
 axis equal vis3d
 camlight
+title("Triangulation of the implicit surface by marching tetrahedra")
 
 savefig(fig_tet,[savepath,'surface_tet'])
 
@@ -119,6 +121,8 @@ if length(rho)>1
 	scatter(OBJ.Ni, log10(OBJ.fitOpts.rho), 30, 'sq', 'LineWidth', 1)
 	ylabel('log_{10}(rho)')
 	
+	title("Condition number of A and smoothing parameter \rho vs number of points in subdomain")
+	
 	savefig(fig,[savepath,'condAndRho_vs_Ni'])
 end
 
@@ -133,6 +137,8 @@ if length(rho)>1
 	ylabel('log_{10}(condition number)')
 	cb = colorbar;
 	cb.Label.String = 'number in subdomain, N(i)';
+	
+	title("Condition number of A vs smoothing paramter \rho")
 	
 	savefig(fig,[savepath,'cond_vs_rho'])
 end
