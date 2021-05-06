@@ -75,6 +75,7 @@ patch(S_cube, "LineStyle", "none", "FaceColor", "green")
 view(3)
 axis equal vis3d
 camlight
+title("Triangulation of the implicit surface by marching cubes")
 
 savefig(fig, [savepath,'surface_cube'])
 
@@ -83,5 +84,6 @@ patch(S_tet, "LineStyle", "none", "FaceColor", "green")
 view(3)
 axis equal vis3d
 camlight
+title("Triangulation of the implicit surface by marching tetrahedra")
 
 savefig(fig2, [savepath,'surface_tet'])
