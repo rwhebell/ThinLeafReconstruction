@@ -61,7 +61,7 @@ S_tet = aShapeSample(OBJ, alpha, Hmax);
 saveid = fix(clock);
 saveid = sprintf('%d_%02d_%02d_%02d%02d/',saveid(1:5));
 
-savepath = saveid;
+savepath = ['saves/', saveid];
 mkdir(savepath)
 
 save([savepath,'workspace.mat'])
