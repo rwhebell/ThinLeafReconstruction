@@ -4,7 +4,14 @@ MATLAB code for the article "Implicit reconstructions of thin leaf surfaces from
 ## Citing this work
 If you use this code in your work, please cite the following paper:
 
-Whebell, R. M., Moroney, T. J., Turner, I. W., Pethiyagoda, R., & McCue, S. W. (2021). Implicit reconstructions of thin leaf surfaces from large, noisy point clouds. _Applied Mathematical Modelling_.
+Riley M. Whebell, Timothy J. Moroney, Ian W. Turner, Ravindra Pethiyagoda, Scott W. McCue,
+Implicit reconstructions of thin leaf surfaces from large, noisy point clouds,
+Applied Mathematical Modelling,
+Volume 98,
+2021,
+Pages 416-434,
+ISSN 0307-904X,
+https://doi.org/10.1016/j.apm.2021.05.014.
 
 ## Dependencies
 This source code is dependent on the following MATLAB toolboxes:
